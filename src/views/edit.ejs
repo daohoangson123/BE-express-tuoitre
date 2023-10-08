@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+        <title>Edit User</title>
+    </head>
+    <body>
+        <a href="/">Home</a>
+        <form
+            action="/edit-user"
+            method="POST">
+            <fieldset
+                style="width: 300px; display: grid; gap: 10px; padding: 20px">
+                <legend>Edit User <%= userEdit.id %></legend>
+                <input
+                    style="display: none"
+                    name="userId"
+                    value="<%= userEdit.id %>" />
+                <label for="emailId">Email:</label>
+                <input
+                    value="<%= userEdit.email %>"
+                    type="email"
+                    id="emailId"
+                    name="email" />
+                <label for="nameId">Name:</label>
+                <input
+                    value="<%= userEdit.name %>"
+                    type="text"
+                    id="nameId"
+                    name="name" />
+                <label for="cityId">City:</label>
+                <input
+                    value="<%= userEdit.city %>"
+                    type="text"
+                    id="cityId"
+                    name="city" />
+                <button
+                    type="submit"
+                    style="width: fit-content; justify-self: center">
+                    Edit
+                </button>
+            </fieldset>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+        <title>Express BE / Data List</title>
+    </head>
+    <body>
+        <div
+            style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            ">
+            <form
+                action="/create-user"
+                method="POST">
+                <fieldset
+                    style="
+                        width: 300px;
+                        display: grid;
+                        gap: 10px;
+                        padding: 20px;
+                    ">
+                    <legend>Add new User</legend>
+                    <label for="emailId">Email:</label>
+                    <input
+                        type="email"
+                        id="emailId"
+                        name="email" />
+                    <label for="nameId">Name:</label>
+                    <input
+                        type="text"
+                        id="nameId"
+                        name="name" />
+                    <label for="cityId">City:</label>
+                    <input
+                        type="text"
+                        id="cityId"
+                        name="city" />
+                    <button
+                        type="submit"
+                        style="width: fit-content; justify-self: center">
+                        Add
+                    </button>
+                </fieldset>
+            </form>
+            <div>
+                List Users
+                <table>
+                    <tr>
+                        <th style="border: 1px solid black; padding: 5px">
+                            Id
+                        </th>
+                        <th style="border: 1px solid black">Email</th>
+                        <th style="border: 1px solid black">Name</th>
+                        <th style="border: 1px solid black">City</th>
+                        <th style="border: 1px solid black">Action</th>
+                    </tr>
+                    <% listUsers && listUsers.forEach(function(user) {%>
+                    <tr>
+                        <td
+                            style="
+                                border: 1px solid black;
+                                padding: 5px;
+                                text-align: center;
+                            ">
+                            <%= user.id %>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px">
+                            <%= user.email %>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px">
+                            <%= user.name %>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px">
+                            <%= user.city %>
+                        </td>
+                        <td
+                            style="
+                                border: 1px solid black;
+                                display: flex;
+                                gap: 10px;
+                                padding: 5px;
+                            ">
+                            <button>
+                                <a
+                                    href="/edit-user/<%= user.id %>"
+                                    style="text-decoration: none"
+                                    >Edit</a
+                                >
+                            </button>
+                            <form
+                                action="/delete-user/:id"
+                                method="POST">
+                                <input
+                                    type="text"
+                                    value="<%= user.id %>"
+                                    name="userId"
+                                    style="display: none" />
+                                <button>Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
