@@ -7,6 +7,15 @@ const getAllUser = async () => {
     return results;
 };
 
+const postNewUser = async (email, name, city) => {
+    let [results, fields] = await connection.promise().query(
+        ` INSERT INTO
+            Users (email, name, city)
+            VALUES(?, ?, ?)`,
+        [email, name, city],
+    );
+};
+
 const editUserById = async (email, name, city, userId) => {
     let [results, fields] = await connection.promise().query(
         `UPDATE Users
@@ -24,6 +33,7 @@ const deleteUserById = async (userId) => {
 
 module.exports = {
     getAllUser,
+    postNewUser,
     editUserById,
     deleteUserById,
 };

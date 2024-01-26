@@ -2,6 +2,7 @@ const connection = require('../config/database');
 
 const {
     getAllUser,
+    postNewUser,
     editUserById,
     deleteUserById,
 } = require('../services/CRUD');
@@ -23,16 +24,18 @@ const getEditPage = async (req, res) => {
     res.render('edit.ejs', { userEdit: user });
 };
 
-const postCreateUser = (req, res) => {
+const postCreateUser = async (req, res) => {
     let email = req.body.email;
     let name = req.body.name;
     let city = req.body.city;
-    connection.query(
-        ` INSERT INTO
-        Users (email, name, city)
-        VALUES(?, ?, ?)`,
-        [email, name, city],
-    );
+    // connection.query(
+    //     ` INSERT INTO
+    //     Users (email, name, city)
+    //     VALUES(?, ?, ?)`,
+    //     [email, name, city],
+    // );
+
+    await postNewUser(email, name, city);
 
     res.redirect('/');
 };
